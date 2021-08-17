@@ -8,41 +8,48 @@ const noOfNotes = document.querySelectorAll('.noOfNotes');
 const message = document.querySelector('.message');
 let notes = [2000, 500, 100, 20, 10, 5, 1];
 let returnNotes = [];
-
+hideMessage();
 btnEnter.addEventListener('click', function () {
-  checkDiv.style.display = 'block';
+  if (bill.value == '') {
+    showMessage('Enter the bill amount');
+  } else {
+    checkDiv.style.display = 'block';
+  }
 });
 btnCheck.addEventListener('click', function () {
   hideMessage();
-
-  let billAmount = parseInt(bill.value);
-  let cashAmount = parseInt(cash.value);
-  for (const notes of noOfNotes) {
-    notes.innerText = '';
-  }
-  if (cashAmount === billAmount) {
-    showMessage('No change');
-  } else if (billAmount > cashAmount) {
-    showMessage(
-      'I see you dont have any cash...Would you love to work as Naukar?'
-    );
+  if (cash.value == '') {
+    showMessage('Enter the cash amount');
   } else {
-    returnChange.style.display = 'block';
-    let returnAmount = cashAmount - billAmount;
-    console.log('Return Amount: ' + returnAmount);
-
-    for (let i = 0; i < notes.length; i++) {
-      returnNotes[i] = Math.floor(returnAmount / notes[i]);
-      returnAmount = returnAmount - notes[i] * returnNotes[i];
-      noOfNotes[i].innerText = returnNotes[i];
-      if (returnAmount === 0) {
-        break;
-      }
-    }
-
+    let billAmount = parseInt(bill.value);
+    let cashAmount = parseInt(cash.value);
     for (const notes of noOfNotes) {
-      if (notes.innerText == '0') {
-        notes.innerText = '';
+      notes.innerText = '';
+    }
+    if (cashAmount === billAmount) {
+      showMessage('No change');
+    } else if (billAmount > cashAmount) {
+      showMessage(
+        'I see you dont have any cash...Would you love to work as Naukar?'
+      );
+    } else {
+      returnChange.style.display = 'block';
+      let returnAmount = cashAmount - billAmount;
+      console.log('Return Amount: ' + returnAmount);
+
+      for (let i = 0; i < notes.length; i++) {
+        returnNotes[i] = Math.floor(returnAmount / notes[i]);
+        returnAmount = returnAmount - notes[i] * returnNotes[i];
+        noOfNotes[i].innerText = returnNotes[i];
+        if (returnAmount === 0) {
+          break;
+        }
+      }
+
+      for (const notes of noOfNotes) {
+        if (notes.innerText == '0') {
+          notes.innerText = '';
+        }
       }
     }
   }
@@ -50,7 +57,7 @@ btnCheck.addEventListener('click', function () {
 function hideMessage() {
   message.style.display = 'none';
 }
-function showMessage(message1) {
+function showMessage(msg) {
   message.style.display = 'block';
-  message.innerText = message1;
+  message.innerText = msg;
 }
