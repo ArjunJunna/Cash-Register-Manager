@@ -5,7 +5,7 @@ const btnCheck = document.querySelector('#btn-check');
 const checkDiv = document.querySelector('#cash-div');
 const returnChange = document.querySelector('.returnChange');
 const noOfNotes = document.querySelectorAll('.noOfNotes');
-
+const message = document.querySelector('.message');
 let notes = [2000, 500, 100, 20, 10, 5, 1];
 let returnNotes = [];
 
@@ -13,25 +13,21 @@ btnEnter.addEventListener('click', function () {
   checkDiv.style.display = 'block';
 });
 btnCheck.addEventListener('click', function () {
-  returnChange.style.display = 'block';
+  hideMessage();
+
   let billAmount = parseInt(bill.value);
   let cashAmount = parseInt(cash.value);
-  //console.log('billAmount: ' + billAmount);
   for (const notes of noOfNotes) {
     notes.innerText = '';
   }
-  console.log('Bill Amount: ' + billAmount);
-  console.log('Cash Amount: ' + cashAmount);
-  /*let returnAmount = cashAmount - billAmount;
-  console.log('Return Amount: ' + returnAmount);*/
   if (cashAmount === billAmount) {
-    alert('No change');
+    showMessage('No change');
   } else if (billAmount > cashAmount) {
-    alert('Please get more cash...');
+    showMessage(
+      'I see you dont have any cash...Would you love to work as Naukar?'
+    );
   } else {
-    setTimeout(function () {
-      returnChange.className = output.className.replace('', 'show');
-    }, 1000);
+    returnChange.style.display = 'block';
     let returnAmount = cashAmount - billAmount;
     console.log('Return Amount: ' + returnAmount);
 
@@ -49,10 +45,12 @@ btnCheck.addEventListener('click', function () {
         notes.innerText = '';
       }
     }
-
-    console.log(returnNotes);
-    console.log(noOfNotes);
-
-    returnNotes = [];
   }
 });
+function hideMessage() {
+  message.style.display = 'none';
+}
+function showMessage(message1) {
+  message.style.display = 'block';
+  message.innerText = message1;
+}
