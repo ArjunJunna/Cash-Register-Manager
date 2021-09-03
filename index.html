@@ -15,11 +15,11 @@
       </div>
       <section class="crm">
       <div>
-        <input class=input type="number" placeholder="Enter the bill amount" id='bill' name=""/>
+        <input class=input type="number" placeholder="Enter the bill amount" id='bill' name="" min="01" oninput="this.value = Math.abs(this.value)"/>
         <button class=btn id='btn-enter'>Enter</button>
       </div>
       <div id='cash-div'>
-        <input class=input type="number" placeholder="Enter the cash amount" id='cash' name=""/>
+        <input class=input type="number" placeholder="Enter the cash amount" id='cash' name="" min="01" oninput="this.value = Math.abs(this.value)"/>
         <button class=btn id='btn-check'>Check</button>
       </div>
       <div class="message"></div>

@@ -12,6 +12,8 @@ hideMessage();
 btnEnter.addEventListener('click', function () {
   if (bill.value == '') {
     showMessage('Enter the bill amount');
+  } else if (bill.value == 0) {
+    showMessage('Nothing to return...');
   } else {
     checkDiv.style.display = 'block';
   }
